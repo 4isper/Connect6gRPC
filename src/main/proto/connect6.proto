@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.example.connect6;
+
+service Connect6 {
+    rpc Register (Empty) returns (PlayerResponse);
+    rpc PlacePiece (PlacePieceRequest) returns (ActionResponse);
+    rpc GetCurrentPlayer (Empty) returns (PlayerResponse);
+    rpc GetBoard (Empty) returns (BoardResponse);
+    rpc CheckWin (Empty) returns (PlayerResponse);
+    rpc ResetBoard (Empty) returns (Empty);
+}
+
+message Empty {}
+
+message PlayerResponse {
+    int32 player = 1;
+}
+
+message PlacePieceRequest {
+    int32 x = 1;
+    int32 y = 2;
+    int32 player = 3;
+}
+
+message ActionResponse {
+    bool success = 1;
+}
+
+message BoardResponse {
+    repeated Row rows = 1;
+}
+
+message Row {
+    repeated int32 cells = 1;
+}
